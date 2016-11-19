@@ -1,0 +1,8 @@
+nsqlookupd_2: nsqlookupd -http-address=0.0.0.0:4163 -tcp-address=0.0.0.0:4162 
+nsqlookupd_1: nsqlookupd -http-address=0.0.0.0:4161 -tcp-address=0.0.0.0:4160
+nsqd_1: nsqd -http-address=0.0.0.0:4151 -tcp-address=0.0.0.0:4150 -lookupd-tcp-address=0.0.0.0:4160 -lookupd-tcp-address=0.0.0.0:4162 -worker-id=678 -data-path=nsqd-1-data
+nsqd_2: nsqd -http-address=0.0.0.0:4153 -tcp-address=0.0.0.0:4152 -lookupd-tcp-address=0.0.0.0:4160 -lookupd-tcp-address=0.0.0.0:4162 -worker-id=679 -data-path=nsqd-2-data
+nsqadmin: nsqadmin -lookupd-http-address=0.0.0.0:4161,0.0.0.0:4163
+
+
+
