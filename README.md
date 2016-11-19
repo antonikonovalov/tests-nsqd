@@ -1,3 +1,11 @@
+# Зачем?
+
+ Чтобы проверить исход такой схемы
+
+ ![NsqdMany](http://media.tumblr.com/edb403d38fc2bcc727b8655ea70eb3a7/tumblr_inline_mf8sfr2sp41qj3yp2.png)
+
+ подробнее описано [тут](http://nsq.io/deployment/topology_patterns.html), где рассматривается распределенный случай и nsq_to_file подписывает не к nsqd, а к nsqlookupd для динамического роутинга в случае фейлов.
+
 # Установка и запуск
 
 * качаем последную сборку nsqd(https://github.com/nsqio/nsq/releases/tag/v0.3.8) и кидаем бинари в $PATH
