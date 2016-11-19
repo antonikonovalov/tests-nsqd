@@ -86,55 +86,60 @@
 # Тестируем на получение дублей сообщений
 
 *  `./publish.sh` - пишем в nsqd_1 и в nsqd_2 по 1000 сообщений
-   ```
-   $ ./publish.sh
-   OKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKO...
-   ...
-   OKOKOKOK....
-   ```
+
+    ```
+        $ ./publish.sh
+        OKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKOKO...
+        ...
+        OKOKOKOK....
+    ```
+
 *  ` forego start -f Procfile.nsqtofile ` - запускаем nsq_to_file_1,nsq_to_file_2 (получаем наши сообщения) и запоминаем как называются файлы с логами
+
    ```
-   $ forego start -f Procfile.nsqtofile
-   forego  | starting file_1.1 on port 5000
-   forego  | starting file_2.1 on port 5100
-   file_2.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
-   file_1.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
-   file_1.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4152) connecting to nsqd
-   file_2.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4152) connecting to nsqd
-   file_1.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4150) connecting to nsqd
-   file_2.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4150) connecting to nsqd
-   file_1.1 | 2016/11/19 23:04:54 INFO: opening nsq_to_file_1/test.antoniko-3.2016-11-19_23.log
-   file_1.1 | 2016/11/19 23:04:54 syncing 1 records to disk
-   file_2.1 | 2016/11/19 23:04:54 INFO: opening nsq_to_file_2/test.antoniko-3.2016-11-19_23.log
-   file_2.1 | 2016/11/19 23:04:54 syncing 1 records to disk
-   file_2.1 | 2016/11/19 23:04:54 syncing 136 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 145 records to disk
-   file_2.1 | 2016/11/19 23:04:54 syncing 164 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 165 records to disk
-   file_2.1 | 2016/11/19 23:04:54 syncing 162 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 164 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 105 records to disk
-   file_2.1 | 2016/11/19 23:04:54 syncing 135 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 164 records to disk
-   file_2.1 | 2016/11/19 23:04:54 syncing 164 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 134 records to disk
-   file_2.1 | 2016/11/19 23:04:54 syncing 150 records to disk
-   file_1.1 | 2016/11/19 23:04:54 syncing 104 records to disk
-   file_2.1 | 2016/11/19 23:05:24 syncing 102 records to disk
-   file_1.1 | 2016/11/19 23:05:24 syncing 4 records to disk
-   file_2.1 | 2016/11/19 23:06:02 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
-   file_1.1 | 2016/11/19 23:06:10 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
+       $ forego start -f Procfile.nsqtofile
+       forego  | starting file_1.1 on port 5000
+       forego  | starting file_2.1 on port 5100
+       file_2.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
+       file_1.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
+       file_1.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4152) connecting to nsqd
+       file_2.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4152) connecting to nsqd
+       file_1.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4150) connecting to nsqd
+       file_2.1 | 2016/11/19 23:04:54 INF    1 [test/nsq_to_file] (antoniko-3.local:4150) connecting to nsqd
+       file_1.1 | 2016/11/19 23:04:54 INFO: opening nsq_to_file_1/test.antoniko-3.2016-11-19_23.log
+       file_1.1 | 2016/11/19 23:04:54 syncing 1 records to disk
+       file_2.1 | 2016/11/19 23:04:54 INFO: opening nsq_to_file_2/test.antoniko-3.2016-11-19_23.log
+       file_2.1 | 2016/11/19 23:04:54 syncing 1 records to disk
+       file_2.1 | 2016/11/19 23:04:54 syncing 136 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 145 records to disk
+       file_2.1 | 2016/11/19 23:04:54 syncing 164 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 165 records to disk
+       file_2.1 | 2016/11/19 23:04:54 syncing 162 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 164 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 105 records to disk
+       file_2.1 | 2016/11/19 23:04:54 syncing 135 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 164 records to disk
+       file_2.1 | 2016/11/19 23:04:54 syncing 164 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 134 records to disk
+       file_2.1 | 2016/11/19 23:04:54 syncing 150 records to disk
+       file_1.1 | 2016/11/19 23:04:54 syncing 104 records to disk
+       file_2.1 | 2016/11/19 23:05:24 syncing 102 records to disk
+       file_1.1 | 2016/11/19 23:05:24 syncing 4 records to disk
+       file_2.1 | 2016/11/19 23:06:02 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
+       file_1.1 | 2016/11/19 23:06:10 INF    1 [test/nsq_to_file] querying nsqlookupd http://127.0.0.1:4161/lookup?topic=test
    ```
+
 * `tests-nsqd  -a=nsq_to_file_1/test.antoniko-3.2016-11-19_23.log -b=nsq_to_file_2/test.antoniko-3.2016-11-19_23.log` - сравниваем логи на повторные сообщения
+
    ```
-    $ tests-nsqd  -a=nsq_to_file_1/test.antoniko-3.2016-11-19_23.log -b=nsq_to_file_2/test.antoniko-3.2016-11-19_23.log
-    message |count
-    _____________________
-    _____________________
-    total uniq in A: nsq_to_file_1/test.antoniko-3.2016-11-19_23.log 986
-    total uniq in B: nsq_to_file_2/test.antoniko-3.2016-11-19_23.log 1014
-    total doubles -  0
-    total uniq -  2000
+        $ tests-nsqd  -a=nsq_to_file_1/test.antoniko-3.2016-11-19_23.log -b=nsq_to_file_2/test.antoniko-3.2016-11-19_23.log
+        message |count
+        _____________________
+        _____________________
+        total uniq in A: nsq_to_file_1/test.antoniko-3.2016-11-19_23.log 986
+        total uniq in B: nsq_to_file_2/test.antoniko-3.2016-11-19_23.log 1014
+        total doubles -  0
+        total uniq -  2000
    ```
 
 Можно повторять эти три шага - дублей нет
